@@ -1,0 +1,27 @@
+<!-- 입금정보 페이지 -->
+<div class="depositPage">
+  <div class="contHead">
+    <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+    <span class="headerFont">입금정보</span>
+  </div>
+  <div class="deposit">
+    <p class="tit">QR 코드 스캔 또는 주소를 복사해 주세요</p>
+    <span>QR 코드</span>
+    <canvas class="frame" id="QrCodeViewId"></canvas>
+    <p class="subtit">지갑주소</p>
+    <em id="ethAddrDepositPage"></em>
+    <a href="#" onclick="copyOTPCode()">복사</a>
+  </div>
+
+  <script>
+    function copyOTPCode() {
+        var text = $('#ethAddrDepositPage').text()
+        console.log("text의 값은? ", text)
+
+        cordova.plugins.clipboard.copy(text);
+        alertToast("클립보드에 복사 되었습니다.")
+    }
+</script>
+
+</div>
+<!-- 입금정보 페이지 End -->

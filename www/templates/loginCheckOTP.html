@@ -1,0 +1,185 @@
+<!-- 자동 로그인을 체크하고 로그인 후, 앱을 그냥 끄고 다시 앱을 실행시켰을 때, 동작한다.  -->
+<div class="otpconfPage" style="display: block;">
+  <div class="contHead">
+    <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+    <span class="headerFont">OTP 인증</span>
+  </div>
+  <div class="contArea">
+    <div class="txtbox">
+      <p>구글 OTP 인증번호를 입력해주세요.</p>
+      <p>발급받은 OTP 번호를 입력해주세요.</p>
+    </div>
+    <div class="pinnumArea">
+      <div class="pinnumChk">
+        <span class="ready"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <input id="hidechk" type="hidden">
+    </div>
+    <div class="clickNum">
+      <ul class="clearfix">
+        <li>
+          <input type="hidden" value="1">
+          <a href="#">1</a>
+        </li>
+        <li>
+          <input type="hidden" value="2">
+          <a href="#">2</a>
+        </li>
+        <li>
+          <input type="hidden" value="3">
+          <a href="#">3</a>
+        </li>
+        <li>
+          <input type="hidden" value="4">
+          <a href="#">4</a>
+        </li>
+        <li>
+          <input type="hidden" value="5">
+          <a href="#">5</a>
+        </li>
+        <li>
+          <input type="hidden" value="6">
+          <a href="#">6</a>
+        </li>
+        <li>
+          <input type="hidden" value="7">
+          <a href="#">7</a>
+        </li>
+        <li>
+          <input type="hidden" value="8">
+          <a href="#">8</a>
+        </li>
+        <li>
+          <input type="hidden" value="9">
+          <a href="#">9</a>
+        </li>
+        <li>
+          <span class="blind">noneButton</span>
+        </li>
+        <li>
+          <input type="hidden" value="0">
+          <a href="#">0</a>
+        </li>
+        <li>
+          <input type="hidden" value="del">
+          <a href="#">Del</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    var user = window.localStorage.getItem("userinfo");
+    userinfo = JSON.parse(user)
+    var email = userinfo.username
+
+    //   var email = $('#loginEmail').val()
+
+    $.ajax({
+      url: serverURL + "/checkOTPCode/",
+      type: "POST",
+      data: {
+        'userID': email
+      },
+      dataType: "json",
+      async: true,
+      success: function (result) {
+        console.log(result.otpCode)
+        $('#secret').val(result.otpCode)
+        window.localStorage.setItem("secretValOTP", result.otpCode);
+        updateOtp();
+        setInterval(timer, 1000);
+      },
+      error: function (error) {
+        console.log(error)
+      }
+    })
+
+    var inputNum = ""
+    var numCount = 0
+    $(".otpconfPage .contArea .clickNum ul li a").on("click", function () {
+      var thisNum = $(this).siblings().val()
+      if (thisNum === "del") {
+
+        if (numCount == 0) {} else {
+          $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(numCount - 1).removeClass("on");
+          inputNum = inputNum.slice(0, -1);
+          numCount = inputNum.length
+
+          $("#hidechk").val(inputNum);
+          if (numCount == 0) {
+            $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(0).addClass("ready").siblings().removeClass(
+              "ready");
+          } else if (numCount == 1) {
+            $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(1).addClass("ready").siblings().removeClass(
+              "ready");
+          } else if (numCount == 2) {
+            $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(2).addClass("ready").siblings().removeClass(
+              "ready");
+          } else if (numCount == 3) {
+            $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(3).addClass("ready").siblings().removeClass(
+              "ready");
+          } else if (numCount == 4) {
+            $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(4).addClass("ready").siblings().removeClass(
+              "ready");
+          } else if (numCount == 5) {
+            $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(5).addClass("ready").siblings().removeClass(
+              "ready");
+          }
+        }
+      } else {
+        inputNum += thisNum
+        inputNum = inputNum.trim()
+        numCount = inputNum.length
+
+        var nowOTP = window.localStorage.getItem("otpNum")
+        $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(numCount - 1).addClass("on").next().addClass(
+          "ready");
+        $("#hidechk").val(inputNum);
+        if (numCount === 6) {
+
+          setTimeout(function () {
+            if (nowOTP == inputNum) {
+              $('.changeSections').each(function () {
+                var _this = this
+                $.get('./templates/mainPage.html', function (data) {
+                  $(_this).append(data);
+                  $('.loginPage').remove()
+                  $('.signupPage').remove()
+                  $('.otpAddPage').remove()
+                  $('.otpconfPage').remove()
+                  $('#loading').hide()
+                  //  ethDepositFn()
+                  // ethHistoryListFn()
+                  $('.loginPage').remove()
+                  MainFn()
+                });
+              });
+
+            } else {
+              $('#loading').hide()
+              alertToast("잘못된 인증 번호입니다.")
+              $(".otpconfPage .contArea .pinnumArea .pinnumChk span").removeClass("on");
+              $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(1).removeClass("ready");
+              $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(2).removeClass("ready");
+              $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(3).removeClass("ready");
+              $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(4).removeClass("ready");
+              $(".otpconfPage .contArea .pinnumArea .pinnumChk span").eq(5).removeClass("ready");
+              numCount = 0
+              inputNum = ""
+              $("#hidechk").val("");
+            }
+          }, 100);
+        } else {
+
+        }
+      }
+    });
+  </script>
+
+</div>

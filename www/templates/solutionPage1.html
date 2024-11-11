@@ -1,0 +1,123 @@
+  <!-- 안전솔루션1 페이지 -->
+  <!-- <div class="solutionPage1" style="display: block;">
+    <div class="contHead">
+      <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+      <span class="headerFont">안전솔루션 요청</span>
+    </div>
+    <div class="solution">
+      <div class="pageBase">
+        <span class="frame"><img src="img/solutionbase.png" alt=""></span>
+        <p>건물 종류를 선택해주세요</p>
+      </div>
+      <div class="pageCont">
+        <ul class="clearfix">
+          <li class="on" value="0">
+            <a href="#">아파트</a>
+          </li>
+          <li value="1">
+            <a href="#">빌라</a>
+          </li>
+          <li value="2">
+            <a href="#">오피스텔</a>
+          </li>
+          <li value="3">
+            <a href="#">전원주택</a>
+          </li>
+          <li value="4">
+            <a href="#">상가주택</a>
+          </li>
+          <li value="5">
+            <a href="#">한옥주택</a>
+          </li>
+          <li value="6">
+            <a href="#">원룸</a>
+          </li>
+          <li value="7">
+            <a href="#">투룸</a>
+          </li>
+          <li value="8">
+            <a href="#">사무실</a>
+          </li>
+          <li value="9">
+            <a href="#">상가</a>
+          </li>
+          <li id="inputBox" value="10">
+            <a href="#">기타</a>
+          </li>
+        </ul>
+        <div class="inputFrame">
+          <input type="text" id="txtVal">
+        </div>
+        <div class="nexBtn">
+          <a href="#" onclick="solution2Fn()">다음</a>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="solutionPage1" style="display: block;">
+      <div class="contHead">
+        <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+        <span class="headerFont">안전솔루션 요청</span>
+      </div>
+      <div class="solution">
+        <div class="pageBase">
+          <span class="frame"><img src="img/solutionbase.png" alt=""></span>
+          <p>건물 종류를 선택해주세요</p>
+        </div>
+        <div class="pageCont">
+          <ul>
+            <li class="on" value="0">
+              <a href="#">빌딩</a>
+            </li>
+            <li value="1">
+              <a href="#">아파트</a>
+            </li>
+            <li value="2">
+              <a href="#" >오피스텔</a>
+            </li>
+            <li value="3">
+              <a href="#">상가</a>
+            </li>
+            <li value="4">
+              <a href="#">사무실</a>
+            </li>
+            <li value="5">
+              <a href="#">다세대빌라</a>
+            </li>
+            <li value="6">
+              <a href="#">단독주택</a>
+            </li>
+          </ul>
+          <div class="nexBtn">
+            <a href="#" onclick="solution2Fn()">다음</a>
+          </div>
+        </div>
+      </div>
+
+
+
+    <script>
+      $(".solutionPage1 .solution .pageCont ul li").on("click", function () {
+        $(this).addClass('on')
+        $(".solutionPage1 .solution .pageCont ul li").not($(this)).removeClass('on')
+
+        var onVal = $(this).val()
+        let infoVal = "";
+        if (onVal == 10) {
+          infoVal = $('#txtVal').val()
+          console.log('입력값:', infoVal)
+        } else {
+          infoVal = $(this).val()
+          console.log('클릭값:', $(this).val())
+        }
+
+        var inputOX = $('#inputBox').attr('class')
+        if (inputOX == 'on') {
+          $('.solutionPage1 .solution .pageCont .inputFrame').css('display', 'block')
+        } else {
+          $('.solutionPage1 .solution .pageCont .inputFrame').css('display', 'none')
+        }
+      })
+    </script>
+  </div>
+  <!-- 안전솔루션1 페이지 End -->

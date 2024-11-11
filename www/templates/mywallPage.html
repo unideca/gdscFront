@@ -1,0 +1,67 @@
+<!-- 내지갑 페이지 -->
+<div class="mywallPage">
+  <div class="contHead">
+    <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+    <span class="headerFont">내지갑</span>
+  </div>
+  <div class="mywall">
+    <div class="myAssets">
+      <div class="assetsCont">
+        <p>총 보유자산</p>
+        <span><em id="AllAssetAmount"></em>KRW</span>
+      </div>
+    </div>
+    <div class="assetsHistory">
+      <p>자산 내역</p>
+      <ul>
+        <li onclick="gdstChFn()">
+          <div class="hisCont">
+            <span class="frame"><img src="img/gdstlogo.png" alt=""></span>
+            <div class="txtArea">
+              <p>GDST<span id="GDSTnum"></span></p>
+              <p>지디에스티<span><em id="GDSTKRW"></em>KRW</span></p>
+            </div>
+          </div>
+        </li>
+        <li onclick="gdschistoryFn()">
+          <div class="hisCont">
+            <span class="frame"><img src="img/logo.png" alt=""></span>
+            <div class="txtArea">
+              <p>GDSC<span id="GDSCnum"></span></p>
+              <p>지디에스씨<span><em id="GDSCKRW"></em>KRW</span></p>
+            </div>
+          </div>
+        </li>
+        <li onclick="ethhistoryFn()">
+          <div class="hisCont">
+            <span class="frame"><img src="img/ethlogo.png" alt=""></span>
+            <div class="txtArea">
+              <p>ETHc<span id="ETHnum"></span></p>
+              <p>이더리움&nbsp&nbsp&nbsp&nbsp<span><em id="mywallPageETHKrw"></em>KRW</span></p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    var GDST = userinfo.GDSTamount;
+    var GDSC = parseFloat(userinfo.GDSCamount);
+    var ETH = parseFloat(userinfo.ethValue);
+    console.log("GDST", GDST);
+    console.log("GDSC", GDSC);
+    console.log("ETH", ETH.toFixed(3));
+    $('#GDSTnum').html(GDST.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    $('#GDSCnum').html(GDSC.toFixed(3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    $('#ETHnum').html(ETH.toFixed(3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    $('#GDSTKRW').html((GDST * 1200).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    $('#GDSCKRW').html(gdscdigifinexUSD(GDSC).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    // $('#GDSCKRW').html((GDSC*1200).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    var Ngdsc = parseFloat($('#GDSCKRW').html().replace(/,/g, ""))
+    var Neth = Number(chethkrw(ETH))
+    var Ngdst = Number(GDST * 1200)
+    var toN = Ngdsc + Neth + Ngdst
+    $('#AllAssetAmount').html(toN.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+  </script>
+</div>
+<!-- 내지갑 페이지 End -->

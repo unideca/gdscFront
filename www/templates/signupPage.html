@@ -1,0 +1,168 @@
+<!-- 회원가입 -->
+<div class="signupPage">
+  <div class="contHead">
+    <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+    <span class="headerFont">회원가입</span>
+  </div>
+  <div class="signup">
+    <p><em></em>기본정보</p>
+    <div class="creapass">
+      <p class="subtit">성명</p>
+      <!-- <div class="hiddenCont">
+        <p id="signUpRealName"></p> -->
+        <div class="newpassBox">
+          <div class="inputFrame">
+            <input type="text" placeholder="이름" id="signUpRealName">
+          </div>
+        </div>
+        
+      <!-- </div> -->
+      <p class="subtit">휴대폰번호</p>
+      <!-- <div class="hiddenCont">
+        <p id="signUpTelNum"></p> -->
+        <div class="newpassBox">
+          <div class="inputFrame">
+            <input type="text" placeholder="휴대폰 번호" id="signUpTelNum">
+          </div>
+        </div>
+        
+      <!-- </div> -->
+    </div>
+    <p><em></em>가입정보</p>
+    <div class="creapass" id="checkemailoverlap">
+      <p>이메일</p>
+      <div class="newpassBox">
+        <div class="inputFrame">
+          <input type="text" placeholder="이메일 주소" id="signUpEmail" onkeyup="emailCheck2()">
+        </div>
+        <!-- <a href="#" onclick="emailCheck()">중복확인</a> -->
+        <span class="type1">이미 등록된 이메일입니다.</span>
+        <span class="type2">사용 가능한 이메일입니다.</span>
+      </div>
+    </div>
+    <div class="creapass" id="signupCrepass">
+      <p>비밀번호</p>
+      <div class="newpassBox" id="signPassConf1">
+        <div class="inputFrame">
+          <input type="password" placeholder="영문자, 숫자 특수문자를 조합한 8~15자리" onkeyup="signUpPass1Check1(this)"
+            id="signupPass">
+        </div>
+        <span class="frame"><img src="img/check.png" alt=""></span>
+        <span class="frame1" onclick="ViewClick()"><img src="img/passx.png" alt=""></span>
+        <span class="frame2" onclick="ViewClick()"><img src="img/passo.png" alt=""></span>
+        <span class="type1">영문자, 숫자, 특수문자를 조합한 8~15 자리로 입력해주세요.</span>
+      </div>
+    </div>
+    <div class="creapass" id="signupCrepass2">
+      <p>비밀번호 확인</p>
+      <div class="newpassBox" id="signPassConf2">
+        <div class="inputFrame">
+          <input type="password" value="" placeholder="비밀번호 재입력" onkeyup="signUpPass2Check2(this)" id="signupPass2">
+        </div>
+        <span class="frame"><img src="img/check.png" alt=""></span>
+        <span class="frame1" onclick="ViewClick2()"><img src="img/passx.png" alt=""></span>
+        <span class="frame2" onclick="ViewClick2()"><img src="img/passo.png" alt=""></span>
+        <span class="type1">비밀번호가 일치하지 않습니다.</span>
+      </div>
+    </div>
+    <div class="nextBtn"><a href="#" id="signupnextBtn">다음</a></div>
+  </div>
+
+
+  <script>
+    // 비밀번호 Type변경 
+    function ViewClick() {
+      var a1 = $('#signPassConf1').attr('class');
+      if (a1 == "newpassBox") {
+        $('#signPassConf1').addClass('on')
+        $('#signupPass').prop("type", "text");
+      } else if (a1 == "newpassBox on") {
+        $('#signPassConf1').removeClass('on')
+        $('#signupPass').prop("type", "password");
+      }
+    }
+
+    function ViewClick2() {
+      var a1 = $('#signPassConf2').attr('class');
+      if (a1 == "newpassBox") {
+        $('#signPassConf2').addClass('on')
+        $('#signupPass2').prop("type", "text");
+      } else if (a1 == "newpassBox on") {
+        $('#signPassConf2').removeClass('on')
+        $('#signupPass2').prop("type", "password");
+      }
+    }
+
+    // 에러체크 nextBtn
+    function signUpPass1Check1(obj) {
+      var pw1 = $(obj).val()
+      var pw2 = $('#pw2Input').val()
+      var reg = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
+      if (pw1 == "") {
+        $('#signupCrepass').addClass('err')
+        $('#signupCrepass').removeClass('on')
+
+        $('.nextBtn').removeClass('on')
+        $('#signupnextBtn').attr('onclick', '')
+      } else {
+
+        if (reg.test(pw1) == false) {
+          $('#signupCrepass').addClass('err')
+          $('#signupCrepass').removeClass('on')
+
+          $('.nextBtn').removeClass('on')
+          $('#signupnextBtn').attr('onclick', '')
+
+        } else {
+          // 비밀번호 입력칸이 정상적일때
+          $('#signupCrepass').addClass('on')
+          $('#signupCrepass').removeClass('err')
+
+          $('.nextBtn').removeClass('on')
+          $('#signupnextBtn').attr('onclick', '')
+
+        }
+      }
+    }
+
+    function signUpPass2Check2(obj) {
+      var pw1 = $('#signupPass').val()
+      var pw2 = $(obj).val()
+      var reg = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
+      if (pw2 == "") {
+        $('#signupCrepass2').removeClass('on')
+        $('#signupCrepass2').addClass('err')
+
+        $('.nextBtn').removeClass('on')
+        $('#signupnextBtn').attr('onclick', '')
+      } else {
+
+        if (pw1 == pw2) {
+          $('#signupCrepass2').addClass('on')
+          $('#signupCrepass2').removeClass('err')
+
+          // 아이디 중복 확인을 하고, 비밀번호 확인 창에서 비번을 동일하게 눌렀을 때,    
+          var a1 = $('#checkemailoverlap').attr('class');
+          if (a1 == "creapass on") {
+            $('.nextBtn').addClass('on')
+            $('#signupnextBtn').attr('onclick', 'checkQrhtml()')
+          } else {
+            $('.nextBtn').removeClass('on')
+            $('#signupnextBtn').attr('onclick', '')
+          }
+
+        } else {
+          $('#signupCrepass2').removeClass('on')
+          $('#signupCrepass2').addClass('err')
+
+          $('.nextBtn').removeClass('on')
+          $('#signupnextBtn').attr('onclick', '')
+        }
+      }
+    }
+  </script>
+
+</div>
+<!-- 회원가입 end -->

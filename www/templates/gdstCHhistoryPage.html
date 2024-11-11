@@ -1,0 +1,180 @@
+<!-- 자산내역(환전) -->
+<div class="gdstCHhistoryPage">
+  <div class="contHead">
+    <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+    <span class="headerFont">자산내역</span>
+  </div>
+  <div class="contArea">
+    <div class="tapMnu">
+      <a href="#" class="gdstBtn on">
+        <img class="type1" src="img/gdst1.png" alt="">
+        <img class="type2" src="img/gdston.png" alt="">
+        <span class="subTit1">GDST</span>
+      </a>
+      <a href="#" class="gdscBtn">
+        <img class="type1" src="img/gdsc.png" alt="">
+        <img class="type2" src="img/gdscon.png" alt="">
+        <span class="subTit2">GDSC</span>
+      </a>
+    </div>
+
+    <div class="contTop1">
+      <div class="txtTop">
+        <div class="imgArea">
+          <span class="frame"><img src="img/gdstlogo.png" alt=""></span>
+          <span>지디에스티</span>
+        </div>
+        <p id="GDSTnum1"></p>
+        <p><span id="GDSTKRW1"></span>KRW</p>
+      </div>
+      <div class="parts"></div>
+      <div class="parts1"></div>
+      <div class="btns">
+        <ul class="clearfix">
+          <li><a href="#" onclick="exch1Fn()">환전</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="contTop2">
+      <div class="txtTop">
+        <div class="imgArea">
+          <span class="frame"><img src="img/logo.png" alt=""></span>
+          <span>지디에스씨</span>
+        </div>
+        <p id="GDSCnum1"></p>
+        <p><span id="GDSCKRW1"></span>KRW</p>
+      </div>
+      <div class="parts"></div>
+      <div class="parts1"></div>
+      <div class="btns">
+        <ul class="clearfix">
+          <li><a href="#" onclick="exch2Fn()">환전</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="historyArea">
+      <p class="tit">환전 내역</p>
+      <div class="hisList1">
+        <ul>
+
+
+          <!-- <li class="nodata">
+            <span class="frame"><img src="img/nodata.png" alt="노데이터"></span>
+            <p>조회내역이 없습니다.</p>
+          </li> -->
+
+          <!-- <li>
+                        <div class="contsec">
+                            <span class="stat">환전</span>
+                            <div class="info">
+                                <span class="dataTime">21.11.11 13:41</span>
+                                <span class="gdst"><em class="num">999,999,999</em>GDST</span>
+                                <p>수수료<span class="fee"><em class="num">0.0012</em>ETH</span></p>
+                            </div>
+                        </div>
+                    </li> -->
+
+          <!-- <li>
+                      <div class="contsec">
+                          <span class="stat">환전</span>
+                          <div class="info">
+                              <span class="dataTime">21.11.11 13:41</span>
+                              <span class="gdst"><em class="num">999,999,999</em>GDST</span>
+                              <p>수수료<span class="fee"><em class="num">0.0012</em>ETH</span></p>
+                          </div>
+                      </div>
+                  </li> -->
+
+          <!-- <li>
+                    <div class="contsec">
+                        <span class="stat">환전</span>
+                        <div class="info">
+                            <span class="dataTime">21.11.11 13:41</span>
+                            <span class="gdst"><em class="num">999,999,999</em>GDST</span>
+                            <p>수수료<span class="fee"><em class="num">0.0012</em>ETH</span></p>
+                        </div>
+                    </div>
+                </li> -->
+
+          <!-- <li>
+                  <div class="contsec">
+                      <span class="stat">환전</span>
+                      <div class="info">
+                          <span class="dataTime">21.11.11 13:41</span>
+                          <span class="gdst"><em class="num">999,999,999</em>GDST</span>
+                          <p>수수료<span class="fee"><em class="num">0.0012</em>ETH</span></p>
+                      </div>
+                  </div>
+              </li> -->
+
+          <!-- <li>
+                <div class="contsec">
+                    <span class="stat">환전</span>
+                    <div class="info">
+                        <span class="dataTime">21.11.11 13:41</span>
+                        <span class="gdst"><em class="num">999,999,999</em>GDST</span>
+                        <p>수수료<span class="fee"><em class="num">0.0012</em>ETH</span></p>
+                    </div>
+                </div>
+            </li> -->
+
+          <!-- <li>
+              <div class="contsec">
+                  <span class="stat">환전</span>
+                  <div class="info">
+                      <span class="dataTime">21.11.11 13:41</span>
+                      <span class="gdst"><em class="num">999,999,999</em>GDST</span>
+                      <p>수수료<span class="fee"><em class="num">0.0012</em>ETH</span></p>
+                  </div>
+              </div>
+            </li> -->
+
+        </ul>
+      </div>
+      <div class="hisList2">
+        <ul>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(".gdstCHhistoryPage>.contArea>.tapMnu>a").on("click", function (evt) {
+      var idxNum = $(this).index();
+      if (idxNum == 0) {
+        $(".gdstCHhistoryPage .contArea .contTop1").show();
+        $(".gdstCHhistoryPage .contArea .contTop2").hide();
+        $(this).addClass("on").siblings().removeClass("on");
+        $(".gdstCHhistoryPage .contArea .historyArea .hisList1").show();
+        $(".gdstCHhistoryPage .contArea .historyArea .hisList2").hide();
+        $(".gdstCHhistoryPage .contArea .tapMnu .subTit1").css("color", "#000");
+        $(".gdstCHhistoryPage .contArea .tapMnu .subTit2").css("color", "#eee");
+      }
+      if (idxNum == 1) {
+        $(".gdstCHhistoryPage .contArea .contTop1").hide();
+        $(".gdstCHhistoryPage .contArea .contTop2").show();
+        $(this).addClass("on").siblings().removeClass("on");
+        $(".gdstCHhistoryPage .contArea .historyArea .hisList1").hide();
+        $(".gdstCHhistoryPage .contArea .historyArea .hisList2").show();
+        $(".gdstCHhistoryPage .contArea .tapMnu .subTit1").css("color", "#eee");
+        $(".gdstCHhistoryPage .contArea .tapMnu .subTit2").css("color", "#000");
+      }
+      evt.preventDefault();
+    });
+    var GDST = userinfo.GDSTamount;
+    var GDSC = parseFloat(userinfo.GDSCamount);
+    console.log("GDST", GDST);
+    console.log("GDSC", GDSC);
+    console.log("GDSC.toFixed(3)", GDSC.toFixed(3));
+    // console.log("GDSC.toFixed(3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ", ")", GDSC.toFixed(3)
+    // .toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    $('#GDSTnum1').html(GDST.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    $('#GDSCnum1').html(GDSC.toFixed(3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    $('#GDSTKRW1').html((GDST * 1200).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    $('#GDSCKRW1').html(gdscdigifinexUSD(GDSC).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    // $('#GDSCKRW1').html((GDSC * 1200).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+  </script>
+</div>
+<!-- 자산내역 end -->

@@ -1,0 +1,45 @@
+  <!-- 출금 페이지 -->
+  <div class="withdrawPage2">
+    <div class="contHead">
+      <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+      <span class="headerFont">출금하기</span>
+    </div>
+    <div class="withdraw">
+      <div class="topCont clearfix">
+        <span class="frame"><img src="img/logo.png" alt=""></span>
+        <div class="txtArea">
+          <p>GDSC<span><em id="GDSC3"></em> GDSC</span></p>
+          <p>지디에스씨<span><em id="GDSCKRW3"></em> KRW</span></p>
+        </div>
+      </div>
+      <div class="infoCont">
+        <div class="contBox">
+          <p>출금주소</p>
+          <div class="inputFrame">
+            <input type="text" placeholder="주소입력" id="gdsctoAddr">
+          </div>
+        </div>
+        <div class="contBox">
+          <p>출금수량</p>
+          <div class="inputFrame">
+            <input class="omit" type="text" placeholder="(최소 출금 수량 : 150 GDSC)" id="gdscNum" onkeyup="gdsckeyup()">
+          </div>
+        </div>
+        <div class="commiBox">
+          <p>출금수수료</p>
+          <p class="rightTxt"><span>0.005</span> ETH</p>
+        </div>
+        <div class="withEth">
+          <p><em class="bar"></em>출금액<span><em id="totalGDSC"></em> GDSC</span></p>
+        </div>
+      </div>
+      <div class="nextBtn"><a class="" href="#" id="gdscWithNext" onclick="">다음</a></div>
+    </div>
+    <script>
+      var GDSC = parseFloat(userinfo.GDSCamount);
+      console.log("GDSC", GDSC);
+      $('#GDSC3').html(GDSC.toFixed(3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","))
+      $('#GDSCKRW3').html(gdscdigifinexUSD(GDSC).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+    </script>
+  </div>
+  <!-- 출금 페이지 End-->

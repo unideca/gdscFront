@@ -1,0 +1,25 @@
+<!-- 비밀번호 재설정 (이메일 확인) -->
+<div class="confEmail">
+  <div class="contHead">
+    <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt="" ></a>
+    <span class="headerFont">신규비밀번호</span>
+  </div>
+  <div class="confPassword">
+    <p><em></em>비밀번호 재설정</p>
+    <div class="creapass" id="confEmailerron">
+      <p>이메일</p>
+      <div class="newpassBox">
+        <div class="inputFrame">
+          <input type="text" placeholder="이메일 주소" id="email" onkeyup="idCheck2()">
+        </div>
+        <!-- <a href="#" onclick="idCheck()">중복확인</a> -->
+        <span class="type1">등록되지 않은 이메일 입니다.</span>
+        <span class="type2">이메일이 확인 되었습니다.</span>
+      </div>
+    </div>
+    <!-- <div class="nextBtn"><a href="#" disable onclick="confPassFn()">다음</a></div> -->
+    <div class="nextBtn" id="psnextOn"><a href="#" disable id="confEmailnext">다음</a></div>
+  </div>
+
+</div>
+<!-- 비밀번호 재설정 (이메일 확인) end-->

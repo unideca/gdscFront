@@ -1,0 +1,61 @@
+<!-- OTP등록QR 페이지 -->
+<!-- 회원 가입시 OTP 등록 페이지 -->
+<div class="otpAddPage">
+  <div class="contHead">
+    <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+    <span class="headerFont">OTP등록</span>
+  </div>
+  <div class="otpAdd">
+    <div class="otpContArea">
+      <div class="title">
+        <p>OTP 인증앱 실행 후</p>
+        <p>아래 QR코드 스캔 또는</p>
+        <p>코드 번호를 입력하여 주세요.</p>
+      </div>
+      <div class="otpMain">
+        <p>QR 코드</p>
+        <span class="otpBase"><img class="base" src="img/QRbase.png" alt="">
+          <!-- <span class="otpImg"><img src="img/QRtest.png" alt=""></span> -->
+          <span class="otpImg"><img id="otpImg" alt=""></span>
+        </span>
+      </div>
+      <div class="btmCont">
+        <em>코드번호</em>
+        <div class="btmTitle">
+          <span id="otpCodeSpan"></span>
+          <a href="#" class="copyCode" onclick="copyOTPCode()">
+            <i class="far fa-clone"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="nextBtn"><a href="#" onclick="checkOtpHtml()">다음</a></div>
+  </div>
+</div>
+<!-- OTP등록QR 페이지 End-->
+
+  <script>
+  //   $('#loading1').show()
+    $('.otpAddPage #otpCodeSpan').text("")
+    $('#secret').val("")
+
+    secretVal = ""
+    for (var i=0; i<16; i++) {
+        secretVal += ar.charAt(Math.floor(Math.random() * ar.length));
+    };
+
+    $('#secret').val(secretVal)
+    window.localStorage.setItem("secretValOTP", secretVal);
+    updateOtp();
+    setInterval(timer, 1000);
+  //   $('#loading1').hide()
+
+    function copyOTPCode() {
+        var text = $('#secret').val()
+        cordova.plugins.clipboard.copy(text);
+        alertToast("클립보드에 복사 되었습니다.")
+    }
+ </script>
+
+</div>
+
+ 

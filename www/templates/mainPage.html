@@ -1,0 +1,194 @@
+<!-- 메인페이지 -->
+<div class="mainPage">
+  <div class="contHead">
+    <div class="headCont">
+      <span class="frame"><img src="img/logo.png" alt=""></span>
+      <span class="headerFont">GDSC</span>
+    </div>
+  </div>
+  <div class="main">
+    <div class="topCont">
+      <div id="touchSlider11">
+        <ul>
+          <li>
+            <span class="frame"><img src="img/mainslider2.png" alt=""></span>
+          </li>
+          <li>
+            <span class="frame"><img src="img/mainslider1.png" alt=""></span>
+          </li>
+        </ul>
+      </div>
+      <div class="slider-controls">
+        <div class="slider-count"></div>
+      </div>
+    </div>
+    <div class="solutionBox">
+      <a href="#" onclick="saveSolutionFn()">
+        <span class="frame"><img src="img/solcheck.png" alt=""></span>
+        <p>내 건물 안전 솔루션 요청하기</p>
+        <span>여기를 눌러서 요청하기</span>
+      </a>
+    </div>
+    <div class="saveNews">
+      <div class="contTit">
+        <p>안전뉴스</p>
+        <a href="#" onclick="savenewsALLFn()">더보기 +</a>
+      </div>
+      <ul>
+        <!-- <li>
+          <div class="newsCont">
+            <p>&#8226&nbsp; 공사중단 장기방치 건축물의 공사중단 장기방치 건물의</p>
+            <span class="on">
+              <div class="frame"><img src="img/newicon.png" alt=""></div>02-17
+            </span>
+          </div>
+        </li>
+        <li>
+          <div class="newsCont">
+            <p>&#8226&nbsp; 서울시, 다중이용시설 화재 서울시, 다중이용시설 화재</p>
+            <span class="on">
+              <div class="frame"><img src="img/newicon.png" alt=""></div>02-16
+            </span>
+          </div>
+        </li>
+        <li>
+          <div class="newsCont">
+            <p>&#8226&nbsp; 건축법 시행규칙</p>
+            <span>
+              <div class="frame"><img src="img/newicon.png" alt=""></div>02-11
+            </span>
+          </div>
+        </li>
+        <li>
+          <div class="newsCont">
+            <p>&#8226&nbsp; 건축법 시행령</p>
+            <span>
+              <div class="frame"><img src="img/newicon.png" alt=""></div>02-11
+            </span>
+          </div>
+        </li> -->
+      </ul>
+    </div>
+    <div class="myAssets">
+      <p>나의 자산</p>
+      <div class="assetsCont" onclick="mywallFn()">
+        <p>총 보유자산</p>
+        <span><em id="AllAssetAmount1"></em>KRW</span>
+      </div>
+    </div>
+  </div>
+  <div class="navBtn">
+    <ul>
+      <li>
+        <a href="#" class="mainBtn" onclick="saveSolutionFn()">
+          <span class="img"><img src="img/solicon.png" alt=""></span>
+          <span class="img1"><img src="img/acsolicon.png" alt=""></span>
+          <p>솔루션요청</p>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="mainBtn" onclick="mywallFn()">
+          <span class="img"><img src="img/wallicon.png" alt=""></span>
+          <span class="img1"><img src="img/acwallicon.png" alt=""></span>
+          <p>내지갑</p>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="mainBtn" onclick="setting1Fn()">
+          <span class="img"><img src="img/bellicon.png" alt=""></span>
+          <span class="img1"><img src="img/acbellicon.png" alt=""></span>
+          <p>소식</p>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="mainBtn" onclick="setting2Fn()">
+          <span class="img"><img src="img/seticon.png" alt=""></span>
+          <span class="img1"><img src="img/acseticon.png" alt=""></span>
+          <p>설정</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    $('#touchSlider11').touchSlider({
+      controls: false,
+      paging: false,
+      initComplete: function (e) {
+        var _this = this;
+        var paging = '';
+        var len = Math.ceil(this._len / this._view);
+
+        for (var i = 1; i <= len; i++) {
+          paging += '<button type="button" class="page">page' + i + '</button>';
+        }
+
+        $(this).next().find('.paging').html(paging).find('.page').on('click', function (e) {
+          _this.go_page($(this).index());
+        });
+      },
+      counter: function (e) {
+        $(this).next().find('.page').removeClass('on').eq(e.current - 1).addClass('on');
+        $(this).next().find('.slider-count').html(e.current + '&nbsp/&nbsp' + e.total);
+      },
+      autoplay: {
+        enable: true,
+        pauseHover: true,
+        addHoverTarget: '', // 다른 오버영역 추가 ex) '.someBtn, .someContainer'
+        interval: 3500
+      },
+    });
+    var GDST = userinfo.GDSTamount;
+    var GDSC = parseFloat(userinfo.GDSCamount);
+    var ETH = parseFloat(userinfo.ethValue);
+    console.log("GDST", GDST);
+    console.log("GDSC", GDSC);
+    console.log("ETH", ETH.toFixed(3));
+    var Ngdsc = parseFloat(gdscdigifinexUSD(GDSC).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",").replace(
+      /,/g, ""))
+    var Neth = Number(chethkrw(ETH))
+    var Ngdst = Number(GDST * 1200)
+    var toN = Ngdsc + Neth + Ngdst
+    $('#AllAssetAmount1').html(toN.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+
+    window.addEventListener("load", (event) => {
+  const allAmountEl = document.querySelector("#AllAssetAmount1");
+
+  function observeBalance() {
+    const GDST = userinfo.GDSTamount;
+    const GDSC = parseFloat(userinfo.GDSCamount);
+    const ETH = parseFloat(userinfo.ethValue);
+    const Ngdsc = parseFloat(
+      gdscdigifinexUSD(GDSC).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",").replace(/,/g, "")
+    );
+    const Neth = Number(chethkrw(ETH));
+    const Ngdst = Number(GDST * 1200);
+    const toN = Ngdsc + Neth + Ngdst;
+
+    $('#AllAssetAmount1').html(toN.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+  }
+
+  function handleIntersection(entries, observer) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        observeBalance();
+        alertToast("잔액 확인 실행");
+        observer.unobserve(entry.target); // 요소가 보이면 더 이상 감지하지 않도록 옵저버 해제
+      }
+    });
+  }
+
+  if (allAmountEl) {
+    const observer = new IntersectionObserver(handleIntersection, { threshold: 0.1 });
+    observer.observe(allAmountEl);
+  } else {
+    console.error("Element #AllAssetAmount1 not found");
+  }
+});
+
+
+    
+  </script>
+
+</div>
+<!-- 메인페이지 End-->

@@ -1,0 +1,91 @@
+<!-- 로그인페이지  -->
+<div class="loginPage">
+  <div class="login">
+    <span class="logoFrame"><img src="img/logo.png" alt=""></span>
+    <p class="logotit">GDSC</p>
+    <p>로그인</p>
+    <div class="inputBox" id="loginEmailBox">
+      <span class="frame"><img src="img/userimg.png" alt=""></span>
+      <div class="inputFrame"><input type="text" id="loginEmail" placeholder="이메일" value=""></div>
+    </div>
+    <div class="inputBox" id="loginPassConf">
+      <span class="frame"><img src="img/passimg.png" alt=""></span>
+      <div class="inputFrame"><input type="password" id="loginPassword" placeholder="비밀번호" value=""></div>
+      <span class="frame1" onclick="loginPassView()"><img src="img/passx.png" alt=""></span>
+      <span class="frame2" onclick="loginPassView()"><img src="img/passo.png" alt=""></span>
+    </div>
+    <div class="btnBox" id="aaa">
+      <input class="autologin" type="checkbox" id="autologin"/><label for="autoLogin" onclick="autoLoginTogle()"><em class="box"><img src="img/checkbox.png" alt=""></em><em class="boxOn"><img src="img/checkon.png" alt=""></em>자동로그인</label>
+    </div>
+    <div class="btnBox1" id="bbb">
+      <input class="saveID" type="checkbox" id="saveID"/><label for="autoLogin" onclick="saveIDTogle()"><em class="box"><img src="img/checkbox.png" alt=""></em><em class="boxOn"><img src="img/checkon.png" alt=""></em>이메일 저장</label>
+    </div>
+    <div class="nextBtn" onclick="loginFnReal(this)"><a href="#">로그인</a></div>
+    <a href="#" onclick="confEmailFn()">비밀번호 찾기</a>
+    <a href="#" onclick="signupFn()">회원가입</a>
+  </div>
+
+  <input type="hidden" id="DI">
+  <input type="hidden" id="CI">
+  <input type="hidden" id="CP_CD">
+  <input type="hidden" id="TX_SEQ_NO">
+  <input type="hidden" id="RSLT_CD">
+  <input type="hidden" id="TEL_COM_CD">
+  
+  <script>
+  //체크박스
+  function autoLoginTogle() {
+      var a1 = $('#aaa').attr('class');
+      var aaa = document.getElementById("autologin");
+      if (a1 == "btnBox") {
+        $('#aaa').addClass('on')
+        aaa.checked = true;
+      } else if (a1 == "btnBox on") {
+        $('#aaa').removeClass('on')
+        aaa.checked = false;
+      }
+    }
+  function saveIDTogle() {
+    var b1 = $('#bbb').attr('class');
+    var bbb = document.getElementById("saveID");
+    if (b1 == "btnBox1") {
+      $('#bbb').addClass('on')
+      bbb.checked = true;
+    } else if (b1 == "btnBox1 on") {
+      $('#bbb').removeClass('on')
+      bbb.checked = false;
+    }
+  }
+  //비밀번호 타입변경
+  function loginPassView() {
+    var inputBox = $('#loginPassConf').attr('class');
+    if(inputBox == "inputBox") {
+      $('#loginPassConf').addClass('on')
+      $('#loginPassword').prop("type", "text");
+    }else if(inputBox == "inputBox on"){
+      $('#loginPassConf').removeClass('on')
+      $('#loginPassword').prop("type", "password");
+    }else if(inputBox == "inputBox err") {
+      $('#loginPassConf').addClass('on')
+      $('#loginPassword').prop("type", "text");
+    }else if(inputBox == "inputBox err on") {
+      $('#loginPassConf').removeClass('on')
+      $('#loginPassword').prop("type", "password");
+    }
+  }
+  //로그인 동작
+  // function loginFn() {
+  //   var loginEmail = $('#loginEmail').val()
+  //   var loginPass = $('#loginPassword').val()
+  //   var reg = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+  
+  //   if(loginEmail == "" || reg.test(loginEmail) == false) {
+  //     $('#loginEmailBox').addClass('err')
+  //     alertToast("이메일을 확인해주세요.")
+  //   }else {
+  //     $('#loginEmailBox').removeClass('err')
+  //   }
+  // }
+  </script>
+</div>
+<!-- 로그인페이지 end -->

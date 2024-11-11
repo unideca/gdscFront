@@ -1,0 +1,49 @@
+<!-- 내정보 페이지 -->
+<div class="myPage">
+  <div class="contHead">
+    <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+    <span class="headerFont">내정보 </span>
+  </div>
+  <div class="my">
+    <ul>
+      <li>
+        <div class="myCont">
+          <p>이름</p>
+          <span id="mypagenameinput"></span>
+        </div>
+      </li>
+      <li>
+        <div class="myCont">
+          <p>이메일</p>
+          <span id="mypageemailinput"></span>
+        </div>
+      </li>
+      <li>
+        <div class="myCont">
+          <p>휴대번호</p>
+          <span id="mypagephoneinput"></span>
+        </div>
+      </li>
+    </ul>
+    <a href="#" onclick="confPassFn()">비밀번호 변경</a>
+    <!-- <a href="#" onclick="ComingsoonFn()">비밀번호 변경</a> -->
+  </div>
+
+  <script>
+    var user = window.localStorage.getItem("userinfo");
+    userinfo = JSON.parse(user)
+    // console.log("userinfo의 값은? ", userinfo)
+    console.log("userinfo.name의 값은? ", userinfo.name)
+    console.log("userinfo.username의 값은? ", userinfo.username)
+    console.log("userinfo.phone의 값은? ", userinfo.phone)
+
+    var phoneData = userinfo.phone;
+    var phonehyphen = phoneData.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3");
+    console.log("phonehyphen의 값은? ", phonehyphen)
+
+    $('#mypagenameinput').text(userinfo.name)
+    $('#mypageemailinput').text(userinfo.username)
+    $('#mypagephoneinput').text(phonehyphen)
+  </script>
+</div>
+<!-- 내정보 페이지 end -->

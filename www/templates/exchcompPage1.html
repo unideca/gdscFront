@@ -1,0 +1,40 @@
+<!-- 환전 완료 페이지1 -->
+<div class="exchcompPage1">
+  <div class="contHead">
+    <span class="headerFont">환전</span>
+  </div>
+  <div class="exchangeCon">
+    <div class="posCont">
+      <div class="conTop">
+        <div class="frame"><img src="img/clear.png" alt="chk"></div>
+        <p><span>환전</span>이</p>
+        <p>완료되었습니다.</p>
+      </div>
+      <div class="conBtm">
+        <ul class="clearfix">
+          <li>
+            <div class="frame"><img src="img/gdstlogo.png " alt="vit"></div>
+            <p>GDST</p>
+            <span id="gdst1"></span>
+          </li>
+          <li>
+            <div class="frame"><img src="img/logo.png" alt="vic"></div>
+            <p>GDSC</p>
+            <span id="gdsc1"></span>
+          </li>
+        </ul>
+        <div class="posframe">
+          <div class="frame"><img src="img/arrowRight.png" alt="arrowRight"></div>
+        </div>
+      </div>
+    </div>
+    <div class="btnArea">
+      <a href="#" onclick="MainFn()">확인</a>
+    </div>
+  </div>
+  <script>
+    $('#gdsc1').text($('#gdstCHgdsc').val())
+    $('#gdst1').text($("#gdscExchVal").val())
+  </script>
+</div>
+<!-- 환전 완료 페이지1 End -->

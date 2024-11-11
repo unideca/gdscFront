@@ -1,0 +1,179 @@
+<!-- 스테이킹 내역 페이지 -->
+<div class="stakinghisPage" style="display: block;">
+    <div class="contHeader">
+      <a href="#" class="backPage"><img src="img/arr_l.png" alt="화살표"></a>
+      <span class="pageTit">스테이킹</span>
+    </div>
+    <div class="contArea">
+      <div class="tapMnu">
+        <ul>
+          <li class="on">
+            <a href="#">스테이킹 목록<span class="bar"></span></a>
+          </li>
+          <li><a href="#">내 스테이킹 현황<span class="bar"></span></a></li>
+        </ul>
+      </div>
+  
+      <div class="listArea cont1">
+        <div class="nodata">
+          <span class="frame"><img src="img/nodata.png" alt="노데이터"></span>
+          <p>조회내역이 없습니다.</p>
+        </div>
+        <ul>
+          <li>
+            <div class="contBox">
+              <div class="topCont">
+                <em class="state">진행중</em>
+                <span class="stday">2022-04-10</span> ~ <span class="enday">2022-04-20</span>
+              </div>
+              <div class="midCont">
+                <p class="tit omit">{VIC 스테이킹 띄어쓰기 포함20자 포함20자 포함20자 포함20자}</p>
+                <ol>
+                  <li>
+                    <p>연 이율</p>
+                    <p>1%</p>
+                  </li>
+                  <li>
+                    <p>참여 기간</p>
+                    <p>30일</p>
+                  </li>
+                </ol>
+              </div>
+              <div class="btnArea">
+                <a href="#">스테이킹 신청하기</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="contBox">
+              <div class="topCont">
+                <em class="state">진행중</em>
+                <span class="stday">2022-04-10</span> ~ <span class="enday">2022-04-20</span>
+              </div>
+              <div class="midCont">
+                <p class="tit omit">{VIC 스테이킹 띄어쓰기 포함20자 포함20자 포함20자 포함20자}</p>
+                <ol>
+                  <li>
+                    <p>연 이율</p>
+                    <p>1%</p>
+                  </li>
+                  <li>
+                    <p>참여 기간</p>
+                    <p>30일</p>
+                  </li>
+                </ol>
+              </div>
+              <div class="btnArea">
+                <a href="#">스테이킹 신청하기</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+  
+      <div class="listArea cont2">
+        <div class="nodata">
+          <span class="frame"><img src="img/nodata.png" alt="노데이터"></span>
+          <p>조회내역이 없습니다.</p>
+        </div>
+        <ul>
+          <li>
+            <div class="contBox">
+              <div class="topCont">
+                <em class="state">진행중</em>
+                <span class="stday">2022-04-10</span> ~ <span class="enday">2022-04-20</span>
+              </div>
+              <div class="midCont">
+                <p class="tit omit">{VIC 스테이킹 띄어쓰기 포함20자 포함20자 포함20자 포함20자}</p>
+                <ol>
+                  <li>
+                    <p>연 이율</p>
+                    <p>1000%</p>
+                  </li>
+                  <li>
+                    <p>참여 기간</p>
+                    <p>30일</p>
+                  </li>
+                </ol>
+              </div>
+              <div class="btnArea">
+                <a href="#">상세보기</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="contBox">
+              <div class="topCont">
+                <em class="state">진행중</em>
+                <span class="stday">2022-04-10</span> ~ <span class="enday">2022-04-20</span>
+              </div>
+              <div class="midCont">
+                <p class="tit omit">{VIC 스테이킹 띄어쓰기 포함20자 포함20자 포함20자 포함20자}</p>
+                <ol>
+                  <li>
+                    <p>연 이율</p>
+                    <p>1000%</p>
+                  </li>
+                  <li>
+                    <p>참여 기간</p>
+                    <p>30일</p>
+                  </li>
+                </ol>
+              </div>
+              <div class="btnArea">
+                <a href="#">상세보기</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="contBox">
+              <div class="topCont">
+                <em class="state">진행중</em>
+                <span class="stday">2022-04-10</span> ~ <span class="enday">2022-04-20</span>
+              </div>
+              <div class="midCont">
+                <p class="tit omit">{VIC 스테이킹 띄어쓰기 포함20자 포함20자 포함20자 포함20자}</p>
+                <ol>
+                  <li>
+                    <p>연 이율</p>
+                    <p>1000%</p>
+                  </li>
+                  <li>
+                    <p>참여 기간</p>
+                    <p>30일</p>
+                  </li>
+                </ol>
+              </div>
+              <div class="btnArea">
+                <a href="#">상세보기</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <script>
+        //스테이킹 탭 메뉴 구동 스크립트
+        $(function(){
+        var $stakingtapMnu = $(".stakinghisPage>.contArea>.tapMnu>ul>li>a");
+    
+        $stakingtapMnu.on("click",function(evt){
+            var stakmnuIdx = $(this).parent().index();
+    
+            $(this).parent().addClass("on").siblings().removeClass("on")
+    
+            if (stakmnuIdx == 0) {
+            $(".stakinghisPage>.contArea>.listArea.cont1").show();
+            $(".stakinghisPage>.contArea>.listArea.cont2").hide();
+            } else if (stakmnuIdx == 1) {
+            $(".stakinghisPage>.contArea>.listArea.cont2").show();
+            $(".stakinghisPage>.contArea>.listArea.cont1").hide();
+            }
+            evt.preventDefault();
+        });
+        });
+    </script>
+    <!-- 스테이킹 내역 페이지 end -->
+        
+  </div>

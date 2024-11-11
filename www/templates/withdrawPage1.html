@@ -1,0 +1,43 @@
+<!-- 출금 페이지 -->
+<div class="withdrawPage1">
+  <div class="contHead">
+    <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+    <span class="headerFont">출금하기</span>
+  </div>
+  <div class="withdraw">
+    <div class="topCont clearfix">
+      <span class="frame"><img src="img/ethicon.png" alt=""></span>
+      <div class="txtArea">
+        <p>ETH<span><em id="ETHva"></em> ETH</span></p>
+        <p>이더리움<span><em id="ethkrw"></em> KRW</span></p>
+      </div>
+    </div>
+    <div class="infoCont">
+      <div class="contBox">
+        <p>출금주소</p>
+        <div class="inputFrame">
+          <input type="text" placeholder="주소입력" id="ethtoAddr">
+        </div>
+      </div>
+      <div class="contBox">
+        <p>출금수량</p>
+        <div class="inputFrame">
+          <input class="omit" type="text" placeholder="(최소 출금 수량 : 0.05 ETH)" id="ethnum" onkeyup="ethkeyup()">
+        </div>
+      </div>
+      <div class="commiBox">
+        <p>출금수수료</p>
+        <p class="rightTxt"><span>0.02</span> ETH</p>
+      </div>
+      <div class="withEth">
+        <p><em class="bar"></em>출금액<span><em id="totalethgas"></em> EHT</span></p>
+      </div>
+    </div>
+    <div class="nextBtn"><a class="" href="#" onclick="" id="ethWithNext">다음</a></div>
+  </div>
+</div>
+<script>
+  var ETH = parseFloat(userinfo.ethValue);
+  $('#ETHva').html(ETH.toFixed(3));
+</script>
+<!-- 출금 페이지 End-->

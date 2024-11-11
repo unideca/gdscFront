@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- <meta name="viewport"
+    content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scae=1, width=device-width, height=device-height, minimal-ui, viewport-fit=cover"> -->
+  <meta name="viewport"
+    content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="img-src * 'self' data: https:; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval';" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+
+  <!-- 달력 -->
+  <link rel="stylesheet" type="text/css" href="css/theme.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-touch-events/1.0.5/jquery.mobile-events.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>GDSC</title>
+
+  <!-- 슬라이더 -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery.touchSlider.js"></script>
+
+  <!-- 달력 -->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script src="cordova.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/qrcode.js"></script>
+  <script src="js/sha.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+</head>
+
+<body>
+  <div class="changeSections">
+
+  </div>
+
+  <!-- ETH내역 검색 팝업 -->
+  <div class="ethsrchsetPop">
+    <div class="shadow"></div>
+    <div class="srchsetCont">
+      <div class="btnArea1">
+        <p>조회기간 설정<a href="#" class="clse"><img src="img/closeB.png" alt="닫기"></a></p>
+        <div class="flexbox">
+          <a href="#" id="ethsrchTime1" class="btn1">오늘</a>
+          <span class="bar"></span>
+          <a href="#" id="ethsrchTime2" class="btn2">1개월</a>
+          <span class="bar"></span>
+          <a href="#" id="ethsrchTime3" class="btn3 on">3개월</a>
+          <span class="bar"></span>
+          <a href="#" id="ethsrchTime4" class="btn4">직접입력</a>
+        </div>
+      </div>
+      <div class="calendarArea">
+        <input type="text" id="datepick3" readonly><span> - </span><input type="text" id="datepick4" readonly>
+      </div>
+      <div class="btnArea2">
+        <p>거래유형</p>
+        <div class="flexbox">
+          <a href="#" id="ethsrchBtn1" class="btn1 on">전체</a>
+          <span class="bar"></span>
+          <a href="#" id="ethsrchBtn2" class="btn2">입금</a>
+          <span class="bar"></span>
+          <a href="#" id="ethsrchBtn3" class="btn3">출금</a>
+        </div>
+      </div>
+      <a href="#" class="lookup" onclick="ethlookup()">조회</a>
+    </div>
+  </div>
+  <!-- 내역 검색 팝업 end -->
+
+  <!-- GDST내역 검색 팝업 -->
+  <div class="gdstsrchsetPop">
+    <div class="shadow"></div>
+    <div class="srchsetCont">
+      <div class="btnArea1">
+        <p>조회기간 설정<a href="#" class="clse"><img src="img/closeB.png" alt="닫기"></a></p>
+        <div class="flexbox">
+          <a href="#" id="gdscsrchTime1" class="btn1">오늘</a>
+          <span class="bar"></span>
+          <a href="#" id="gdscsrchTime2" class="btn2">1개월</a>
+          <span class="bar"></span>
+          <a href="#" id="gdscsrchTime3" class="btn3 on">3개월</a>
+          <span class="bar"></span>
+          <a href="#" class="btn4">직접입력</a>
+        </div>
+      </div>
+      <div class="calendarArea">
+        <input type="text" id="datepick1" readonly><span> - </span><input type="text" id="datepick2" readonly>
+      </div>
+      <div class="btnArea2">
+        <p>거래유형</p>
+        <div class="flexbox">
+          <a href="#" id="gdscsrchBtn1" class="btn1 on">전체</a>
+          <span class="bar"></span>
+          <a href="#" id="gdscsrchBtn2" class="btn2">입금</a>
+          <span class="bar"></span>
+          <a href="#" id="gdscsrchBtn3" class="btn3">출금</a>
+        </div>
+      </div>
+      <a href="#" class="lookup" onclick="gdsclookup()">조회</a>
+    </div>
+  </div>
+  <!-- 내역 검색 팝업 end -->
+
+  <input type="hidden" size="30" name="secret" id="secret" class="xlarge" />
+
+  <!-- 로딩 화면 -->
+  <div id="loading1">
+    <div class="loading animate">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <!-- 로딩 화면 -->
+  <div id="loading2">
+    <div class="loading animate">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <!-- <p>계좌 생성중 입니다.</p> -->
+    </div>
+  </div>
+
+</body>
+
+<script>
+  var serverURL = "https://gdscs-6d0624e4b843.herokuapp.com";
+  var ar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+  var inputNum = ""
+  var numCount = 0
+  var lastTimeBackPress = new Date().getTime();
+  var timePeriodToExit = 2000;
+  var userinfo
+  var secretVal = "";
+  var secretValOTP = window.localStorage.getItem("secretValOTP");
+  // var ethAPIKey = "G23NSPEG6WTJZT3D465SUVTQCPI64174QR";
+  var contractAddr = "0xe737871374556c84422F2C884c13e874b22e1b05";
+  var ethAPIKey = "QIZX68NZ1WMRJ94BXBFZY67G3848W7ZVGG";
+
+  window.addEventListener('keyboardWillShow', (event) => {
+    if ($('.solutionPage1').css('display') == 'block') {
+      $('.solutionPage1 .solution .pageCont .nexBtn a').css({
+        'border-radius': 0,
+        'left': 0,
+        'position': 'absolute',
+        'width': '100%'
+      })
+    }
+    if ($('.gdschistoryPage').css('display') == 'block') {
+      $('.withdrawPage2 .withdraw .nextBtn a').css({
+        'border-radius': 0,
+        'left': 0,
+        'position': 'absolute',
+        'width': '100%',
+        'bottom': '-6vw'
+      })
+    }
+    if ($('.withdrawPage1').css('display') == 'block') {
+      $('.withdrawPage1 .withdraw .nextBtn a').css({
+        'border-radius': 0,
+        'left': 0,
+        'position': 'absolute',
+        'width': '100%',
+        'bottom': '-6vw'
+      })
+    }
+  });
+  window.addEventListener('keyboardWillHide', (event) => {
+    if ($('.solutionPage1').css('display') == 'block') {
+      $('.solutionPage1 .solution .pageCont .nexBtn a').css({
+        'border-radius': '8vw',
+        'position': 'inherit',
+      })
+    }
+    if ($('.gdschistoryPage').css('display') == 'block') {
+      $('.withdrawPage2 .withdraw .nextBtn a').css({
+        'border-radius': '8vw',
+        'position': 'initial'
+      })
+    }
+    if ($('.withdrawPage1').css('display') == 'block') {
+      $('.withdrawPage1 .withdraw .nextBtn a').css({
+        'border-radius': '8vw',
+        'position': 'initial'
+      })
+    }
+  });
+
+  function dec2hex(s) {
+    return (s < 15.5 ? '0' : '') + Math.round(s).toString(16);
+  }
+
+  function hex2dec(s) {
+    return parseInt(s, 16);
+  }
+
+  function base32tohex(base32) {
+    var base32chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+    var bits = "";
+    var hex = "";
+    if (base32 == "" || base32 == "undefined" || base32 == null) {} else {
+      for (var i = 0; i < base32.length; i++) {
+        var val = base32chars.indexOf(base32.charAt(i).toUpperCase());
+        bits += leftpad(val.toString(2), 5, '0');
+      }
+      for (var i = 0; i + 4 <= bits.length; i += 4) {
+        var chunk = bits.substr(i, 4);
+        hex = hex + parseInt(chunk, 2).toString(16);
+      }
+      return hex;
+    }
+  }
+
+  function leftpad(str, len, pad) {
+    if (len + 1 >= str.length) {
+      str = Array(len + 1 - str.length).join(pad) + str;
+    }
+    return str;
+  }
+
+  function krwCh(krwValue) {
+    var TKRW;
+    $.ajax({
+      url: "https://api.upbit.com/v1/ticker?markets=KRW-ETH",
+      type: "GET",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function (result) {
+        var upeth = result[0]["trade_price"];
+        var myKRW = upeth * krwValue;
+        TKRW = myKRW.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+    return TKRW;
+  }
+
+  function chethkrw(ethv) {
+    var myKRW;
+    $.ajax({
+      url: "https://api.upbit.com/v1/ticker?markets=KRW-ETH",
+      type: "GET",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function (result) {
+        var upeth = result[0]["trade_price"];
+        myKRW = upeth * ethv;
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+    return myKRW.toFixed(0);
+  }
+
+  function gdscKRW() {
+    var userGdsc;
+    $.ajax({
+      url: "https://openapi.digifinex.com/v3/ticker?symbol=ada_usdt",
+      type: "GET",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function (result) {
+        var gdscPrice = result.ticker[0].last;
+        console.log("gdscUSD: ", gdscPrice);
+        $.ajax({
+          type: "GET",
+          url: "https://api.manana.kr/exchange/rate.json",
+          data: {},
+          async: false,
+          success: function (response) {
+            var now_rate = response[1]["rate"];
+            userGdsc = (now_rate * gdscPrice).toFixed(0);
+          },
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+    // return Number(userGdsc); digifinex 거래소에 gdsc코인이 없어서 API 못받아옴
+    return Number(userGdsc);
+  }
+
+  function gdscdigifinexUSD(myGDSC) {
+    var userGdsc;
+    $.ajax({
+      url: "https://openapi.digifinex.com/v3/ticker?symbol=ada_usdt",
+      type: "GET",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function (result) {
+        var gdscPrice = result.ticker[0].last;
+        console.log("gdscUSD: ", gdscPrice);
+        $.ajax({
+          type: "GET",
+          url: "https://api.manana.kr/exchange/rate.json",
+          data: {},
+          async: false,
+          success: function (response) {
+            var now_rate = response[1]["rate"];
+            userGdsc = now_rate * gdscPrice * myGDSC;
+            userGdsc = userGdsc.toFixed(0);
+            console.log('userGdsc :',userGdsc)
+            return userGdsc;
+          },
+        });
+      },
+      error: function (error) {
+        console.log('userGdsc :',userGdsc)
+        console.log(error);
+      },
+    });
+    if(userGdsc == undefined) userGdsc = 0;
+    return userGdsc;
+  }
+
+  function updateOtp() {
+    var secret = $('#secret').val();
+    // $('.otpaddPage #otpCodeSpan').text($('#secret').val())
+    var key = base32tohex($('#secret').val());
+    var epoch = Math.round(new Date().getTime() / 1000.0);
+    var time = leftpad(dec2hex(Math.floor(epoch / 30)), 16, '0');
+    var aaa = $('#secret').val()
+
+    // updated for jsSHA v2.0.0 - http://caligatio.github.io/jsSHA/
+    var shaObj = new jsSHA("SHA-1", "HEX");
+    shaObj.setHMACKey(key, "HEX");
+    shaObj.update(time);
+    var hmac = shaObj.getHMAC("HEX");
+    $('.otpAddPage #otpCodeSpan').text($('#secret').val())
+    // $('#otpImg').attr('src',
+    // 'https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=' + 
+    // encodeURIComponent('otpauth://totp/GDSC?secret=' + $('#secret').val() + '&issuer=GDSC'));
+
+    const otpAuthUrl = 'otpauth://totp/GDSC?secret=' + encodeURIComponent(secret) + '&issuer=GDSC';
+
+    // QR 코드를 생성하여 'otpImg'에 표시
+    QRCode.toDataURL(otpAuthUrl, { width: 200, height: 200 }, function (err, url) {
+      if (err) {
+        console.error('QR 코드 생성에 실패했습니다.', err);
+        return;
+      }
+      $('#otpImg').attr('src', url);
+    });
+
+    // $('#otpImg').attr('src', 'https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=200x200&chld=M|0&cht=qr&chl=otpauth://totp/Logod%3Fsecret%3D' + $('#secret').val());
+    // $('#qrImg').attr('src', 'https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=200x200&chld=M|0&cht=qr&chl=otpauth://totp/ARTeVIC%3Fsecret%3D' + $('#secret').val());
+
+    $('#secretHex').text(key);
+    $('#secretHexLength').text((key.length * 4) + ' bits');
+    $('#epoch').text(time);
+    $('#hmac').empty();
+
+    if (hmac == 'KEY MUST BE IN BYTE INCREMENTS') {
+      $('#hmac').append($('<span/>').addClass('label important').append(hmac));
+    } else {
+      var offset = hex2dec(hmac.substring(hmac.length - 1));
+      var part1 = hmac.substr(0, offset * 2);
+      var part2 = hmac.substr(offset * 2, 8);
+      var part3 = hmac.substr(offset * 2 + 8, hmac.length - offset);
+      if (part1.length > 0) $('#hmac').append($('<span/>').addClass('label label-default').append(part1));
+      $('#hmac').append($('<span/>').addClass('label label-primary').append(part2));
+      if (part3.length > 0) $('#hmac').append($('<span/>').addClass('label label-default').append(part3));
+    }
+
+    var otp = (hex2dec(hmac.substr(offset * 2, 8)) & hex2dec('7fffffff')) + '';
+    otp = (otp).substr(otp.length - 6, 6);
+
+    $('#otp').text(otp);
+
+    window.localStorage.setItem("otpNum", otp);
+    // console.log(otp)
+  }
+
+  function timer() {
+    var epoch = Math.round(new Date().getTime() / 1000.0);
+    var countDown = 30 - (epoch % 30);
+    if (epoch % 30 == 0) updateOtp();
+    $('#updatingIn').text(countDown);
+  }
+</script>
+
+</html>

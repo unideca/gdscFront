@@ -1,0 +1,235 @@
+<!-- GDSC자산내역 -->
+<div class="gdschistoryPage">
+  <div class="contHead">
+    <a href="#" class="backpage" onclick="backButton(this)"><img src="img/backpage.png" alt=""></a>
+    <span class="headerFont">자산내역</span>
+  </div>
+  <div class="contArea">
+    <div class="contTop">
+      <div class="txtTop">
+        <!-- <a href="#" onclick="staking()">스테이킹</a> -->
+        <span class="frame"><img src="img/logo.png" alt=""></span>
+        <p>GDSC<span id="GDSC2"></span></p>
+        <p>지디에스씨<span><em id="GDSCKRW2"></em>KRW</span></p>
+      </div>
+      <div class="parts"></div>
+      <div class="btns">
+        <ul class="clearfix">
+          <li><a href="#" onclick="depositHtml()">입금</a></li>
+          <li><a href="#" onclick="withdrawFnGDSC()">출금</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="historyArea">
+      <p class="tit">입출금 내역 <em id="innerType1"></em><span id="innerType2"></span><a href="#" class="srchSet">
+          <img src="img/srchSet.png" alt="셋팅"></a></p>
+      <div class="hisList">
+        <ul>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    var $sortbtn1 = $(".gdstsrchsetPop .srchsetCont .btnArea1 .flexbox .btn1");
+    var $sortbtn2 = $(".gdstsrchsetPop .srchsetCont .btnArea1 .flexbox .btn2");
+    var $sortbtn3 = $(".gdstsrchsetPop .srchsetCont .btnArea1 .flexbox .btn3");
+    var $sortbtn4 = $(".gdstsrchsetPop .srchsetCont .btnArea1 .flexbox .btn4");
+    var $srchcalen = $(".gdstsrchsetPop .srchsetCont .calendarArea");
+    var $sortbtn5 = $(".gdstsrchsetPop .srchsetCont .btnArea2 .flexbox .btn1");
+    var $sortbtn6 = $(".gdstsrchsetPop .srchsetCont .btnArea2 .flexbox .btn2");
+    var $sortbtn7 = $(".gdstsrchsetPop .srchsetCont .btnArea2 .flexbox .btn3");
+    //--------------------------------------------------------------------------------------
+    // GDST 내역 조회 버튼 클릭시 출력
+    $(".gdschistoryPage .contArea .historyArea p.tit .srchSet").on("click", function (evt) {
+      $(".gdstsrchsetPop").show();
+      $(".gdstsrchsetPop .srchsetCont").stop().animate({
+        "bottom": "0"
+      }, 350);
+      $srchcalen.hide();
+      $sortbtn1.removeClass("on");
+      $sortbtn2.removeClass("on");
+      $sortbtn3.addClass("on");
+      $sortbtn4.removeClass("on");
+      evt.preventDefault();
+    });
+    // GDST 내역 닫기 버튼 클릭시 화면 닫기
+    $(".gdstsrchsetPop .srchsetCont .btnArea1 p .clse").on("click", function (evt) {
+      $(".gdstsrchsetPop .srchsetCont").stop().animate({
+        "bottom": "-50%"
+      }, 250, function () {
+        $(".gdstsrchsetPop").hide();
+      });
+      evt.preventDefault();
+    });
+    // GDST 내역 그림자 버튼 클릭시 화면 닫기
+    $(".gdstsrchsetPop .shadow").on("click", function (evt) {
+      $(".gdstsrchsetPop .srchsetCont").stop().animate({
+        "bottom": "-50%"
+      }, 250, function () {
+        $(".gdstsrchsetPop").hide();
+      });
+      evt.preventDefault();
+    });
+    //--------------------------------------------------------------------------------------
+
+    // 첫번째 솔트 버튼
+    $sortbtn1.on("click", function () {
+      $(this).addClass("on");
+      $sortbtn2.removeClass("on");
+      $sortbtn3.removeClass("on");
+      $sortbtn4.removeClass("on");
+      $srchcalen.fadeOut();
+    });
+    $sortbtn2.on("click", function () {
+      $(this).addClass("on");
+      $sortbtn1.removeClass("on");
+      $sortbtn3.removeClass("on");
+      $sortbtn4.removeClass("on");
+      $srchcalen.fadeOut();
+    });
+    $sortbtn3.on("click", function () {
+      $(this).addClass("on");
+      $sortbtn1.removeClass("on");
+      $sortbtn2.removeClass("on");
+      $sortbtn4.removeClass("on");
+      $srchcalen.fadeOut();
+    });
+    $sortbtn4.on("click", function () {
+      $(this).addClass("on");
+      $sortbtn1.removeClass("on");
+      $sortbtn2.removeClass("on");
+      $sortbtn3.removeClass("on");
+      $srchcalen.fadeIn();
+    });
+    // 두번째 솔트 버튼
+    $sortbtn5.on("click", function () {
+      $(this).addClass("on");
+      $sortbtn6.removeClass("on");
+      $sortbtn7.removeClass("on");
+    });
+    $sortbtn6.on("click", function () {
+      $(this).addClass("on");
+      $sortbtn5.removeClass("on");
+      $sortbtn7.removeClass("on");
+    });
+    $sortbtn7.on("click", function () {
+      $(this).addClass("on");
+      $sortbtn5.removeClass("on");
+      $sortbtn6.removeClass("on");
+    });
+    //--------------------------------------------------------------------------------------
+
+    // GDST 조회버튼 클릭시 날짜 데이터 삽입
+    $(".gdstsrchsetPop .srchsetCont .lookup").on("click", function (evt) {
+      console.log('눌림')
+      var firstdate = $('#datepick1').datepicker({
+        dateFormat: 'y.M.d'
+      }).val();
+      var secondate = $('#datepick2').datepicker({
+        dateFormat: 'y.M.d'
+      }).val();
+      var sortchkbtn1 = $(".gdstsrchsetPop .srchsetCont .btnArea1 .flexbox a.on").text();
+      var sortchkbtn2 = $(".gdstsrchsetPop .srchsetCont .btnArea2 .flexbox a.on").text();
+
+      if ($sortbtn4.hasClass("on")) {
+        $("#innerType1").text(firstdate + " ~ " + secondate);
+        $(".gdstsrchsetPop .srchsetCont").stop().animate({
+          "bottom": "-50%"
+        }, 250, function () {
+          $(".gdstsrchsetPop").hide();
+        });
+      } else {
+        $("#innerType1").text("");
+        $(".gdstsrchsetPop .srchsetCont").stop().animate({
+          "bottom": "-50%"
+        }, 250, function () {
+          $(".gdstsrchsetPop").hide();
+        });
+      }
+      if ($(".gdstsrchsetPop .srchsetCont .btnArea1 .flexbox a").hasClass("on") && $(
+          ".gdstsrchsetPop .srchsetCont .btnArea2 .flexbox a").hasClass("on")) {
+        $("#innerType2").text(sortchkbtn1 + " · " + sortchkbtn2);
+      }
+      if ($(".gdstsrchsetPop .srchsetCont .btnArea1 .flexbox a:last-child").hasClass("on")) {
+        $("#innerType2").text(" · " + sortchkbtn2);
+      }
+      evt.preventDefault();
+    });
+    //--------------------------------------------------------------------------------------
+
+
+    $("#datepick1").datepicker({
+      dateFormat: 'yy-MM-dd' //Input Display Format 변경
+        ,
+      showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+        ,
+      showMonthAfterYear: true //년도 먼저 나오고, 뒤에 월 표시
+        ,
+      changeYear: true //콤보박스에서 년 선택 가능
+        ,
+      changeMonth: true //콤보박스에서 월 선택 가능
+        ,
+      showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
+        ,
+      buttonImage: "img/calendar.png" //버튼 이미지 경로
+        ,
+      buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+        // ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트
+        // ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+        ,
+      monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 텍스트
+        ,
+      monthNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] //달력의 월 부분 Tooltip 텍스트
+        ,
+      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 부분 텍스트
+        ,
+      dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 부분 Tooltip 텍스트
+        ,
+      minDate: "-1Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+        ,
+      maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+    });
+    //초기값을 오늘 날짜로 설정
+    $('#datepick1').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+
+    $("#datepick2").datepicker({
+      dateFormat: 'yy-MM-dd' //Input Display Format 변경
+        ,
+      showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+        ,
+      showMonthAfterYear: true //년도 먼저 나오고, 뒤에 월 표시
+        ,
+      changeYear: true //콤보박스에서 년 선택 가능
+        ,
+      changeMonth: true //콤보박스에서 월 선택 가능
+        ,
+      showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
+        ,
+      buttonImage: "img/calendar.png" //버튼 이미지 경로
+        ,
+      buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+        // ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트
+        // ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+        ,
+      monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 텍스트
+        ,
+      monthNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] //달력의 월 부분 Tooltip 텍스트
+        ,
+      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 부분 텍스트
+        ,
+      dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 부분 Tooltip 텍스트
+        ,
+      minDate: "-1Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+        ,
+      maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+    });
+    //초기값을 오늘 날짜로 설정
+    $('#datepick2').datepicker('setDate', '+1d'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+    var GDSC = parseFloat(userinfo.GDSCamount);
+    console.log("GDSC", GDSC);
+    $('#GDSC2').html(GDSC.toFixed(3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","))
+    $('#GDSCKRW2').html(gdscdigifinexUSD(GDSC).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+  </script>
+</div>
+<!-- GDSC자산내역 end -->
