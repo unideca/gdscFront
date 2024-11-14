@@ -1456,12 +1456,6 @@ function ethkeyup() {
 
 function withGDSCFn() {
   console.log("출금 버튼");
-  $(".changeSections").each(function () {
-    var _this = this;
-    $.get("./templates/withdrawclear.html", function (data) {
-      $(_this).append(data);
-    });
-  });
   var toAddr = $("#gdsctoAddr").val();
   var gdscValue = $("#gdscNum").val();
   $.ajax({
@@ -1476,6 +1470,22 @@ function withGDSCFn() {
     dataType: "json",
     async: true,
     success: function (result) {
+      var val = result.value;
+      if (val == "-99") {
+        $(".changeSections").each(function () {
+          var _this = this;
+          $.get("./templates/withdrawfail.html", function (data) {
+            $(_this).append(data);
+          });
+        });
+      } else {
+        $(".changeSections").each(function () {
+          var _this = this;
+          $.get("./templates/withdrawclear.html", function (data) {
+            $(_this).append(data);
+          });
+        });
+      }
       console.log("userAddr: ", userAddr);
     },
     error: function (error) {
