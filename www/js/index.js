@@ -1389,6 +1389,7 @@ function withdrawFn() {
         dataType: "json",
         async: true,
         success: function (result) {
+          var val = result.val;
           var upeth = result[0]["trade_price"];
           var myKRW = upeth * parseFloat(userinfo.ethValue);
           const setmyKRW = myKRW
@@ -1507,12 +1508,6 @@ function ethOtpconfPageFn() {
 
 function withdrawclearFn() {
   console.log("출금 버튼");
-  $(".changeSections").each(function () {
-    var _this = this;
-    $.get("./templates/withdrawclear.html", function (data) {
-      $(_this).append(data);
-    });
-  });
   var toAddr = $("#ethtoAddr").val();
   var ethValue = $("#ethnum").val();
   var total = ethValue - 0.02;
@@ -1530,7 +1525,25 @@ function withdrawclearFn() {
     },
     dataType: "json",
     async: true,
-    success: function (result) {},
+    success: function (result) {
+      console.log(result.value); //undefined ?
+      var val =  result.value;
+      if (val == "-99") {
+        $(".changeSections").each(function () {
+          var _this = this;
+          $.get("./templates/withdrawfail.html", function (data) {
+            $(_this).append(data);
+          });
+        });
+      } else {
+        $(".changeSections").each(function () {
+          var _this = this;
+          $.get("./templates/withdrawclear.html", function (data) {
+            $(_this).append(data);
+          });
+        });
+      }
+    },
     error: function (error) {
       console.log(error);
     },
