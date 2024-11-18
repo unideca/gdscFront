@@ -1424,7 +1424,7 @@ function gdsckeyup() {
     userinfo.ethValue >= 0.005
   ) {
     $("#gdscWithNext").addClass("on");
-    $("#gdscWithNext").attr("onclick", "withGDSCFn()");
+    $("#gdscWithNext").attr("onclick", "gdscOtpconfPageFn()");
   } else {
     $("#gdscWithNext").removeClass("on");
     $("#gdscWithNext").attr("onclick", "");
@@ -1511,6 +1511,16 @@ function ethOtpconfPageFn() {
   $(".changeSections").each(function () {
     var _this = this;
     $.get("./templates/ethotpPage.html", function (data) {
+      $(_this).append(data);
+    });
+  });
+}
+
+function gdscOtpconfPageFn() {
+  console.log("소식 버튼");
+  $(".changeSections").each(function () {
+    var _this = this;
+    $.get("./templates/gdscotpPage.html", function (data) {
       $(_this).append(data);
     });
   });
@@ -2135,7 +2145,10 @@ function gdsclookup() {
       var dataCount = result.timeValueCount;
       var html = "";
       var userAddr = userinfo.ethAddr;
-      userAddr = userAddr.toLowerCase();
+      if(userAddr !== null) {
+        userAddr = userAddr.toLowerCase();
+      }
+      console.log('userAddr : ', userAddr);
       console.log("data: ", data);
       if (dataCount == 0) {
         html += '<li class="nodata">';
